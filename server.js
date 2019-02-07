@@ -4,7 +4,7 @@ var bodyParser = require('body-parser')
 //const ExampleNetwork = require('./query');
 	
 var poeClient = require('./allclient');
-var ExampeAdmin = require('./enrollAdmin');
+var ExampleAdmin = require('./enrollAdmin');
 var ExampleUser = require('./registerUser');
 
 //Attach the middleware
