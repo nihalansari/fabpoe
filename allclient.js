@@ -53,6 +53,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 		member_user = user_from_store;
 	} else {
 		throw new Error('Failed to get user2.... run registerUser.js');
+		onerr('Failed to get user2.... run registerUser.js');
 	}
 
 	// get a transaction id object based on the current user assigned to fabric client
@@ -138,7 +139,9 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 				var return_status = {event_status : code, tx_id : transaction_id_string};
 				if (code !== 'VALID') {
 					console.error('The transaction was invalid, code = ' + code);
-					resolve(return_status); // we could use reject(new Error('Problem with the tranaction, event status ::'+code));
+					resolve(return_status); 
+					
+					// we could use reject(new Error('Problem with the tranaction, event status ::'+code));
 				} else {
 					console.log('The transaction has been committed on peer ' + event_hub._ep._endpoint.addr);
 					resolve(return_status);
@@ -154,6 +157,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	} else {
 		console.error('Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...');
 		throw new Error('Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...');
+		onerr('Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...');
 	}
 }).then((results) => {
 	console.log('Send transaction promise and event listener promise have completed');
@@ -163,6 +167,8 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 		
 	} else {
 		console.error('Failed to order the transaction. Error code: ' + response.status);
+		onerr('Failed to order the transaction. Error code: ' + response.status);
+		
 	}
 
 	if(results && results[1] && results[1].event_status === 'VALID') {
@@ -170,9 +176,12 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 		onok('Successfully committed the change to the ledger by the peer');
 	} else {
 		console.log('Transaction failed to be committed to the ledger due to ::'+results[1].event_status);
+		onerr('Transaction failed to be committed to the ledger due to ::'+results[1].event_status);
 	}
 }).catch((err) => {
 	console.error('Failed to invoke successfully :: ' + err);
+	onerr('Failed to invoke successfully :: ' + err);
+	
 });
 
 },
@@ -220,6 +229,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 		member_user = user_from_store;
 	} else {
 		throw new Error('Failed to get user2.... run registerUser.js');
+		onerr('run registerUser.js for the current user');
 	}
 
 	// queryCar chaincode function - requires 1 argument, ex: args: ['CAR4'],
@@ -245,6 +255,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	if (query_responses && query_responses.length == 1) {
 		if (query_responses[0] instanceof Error) {
 			console.error("error from query = ", query_responses[0].toString());
+			onerr("error from query = ", query_responses[0].toString());
 		} else {
 			console.log("Response is ", query_responses[0].toString());
 			onok(query_responses[0].toString());
@@ -254,6 +265,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 	}
 }).catch((err) => {
 	console.error('Failed to query successfully :: ' + err);
+	onerr('Failed to query successfully :: ' + err);
 });
 
 }//end function

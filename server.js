@@ -6,12 +6,25 @@ var bodyParser = require('body-parser')
 var poeClient = require('./allclient');
 var ExampleAdmin = require('./enrollAdmin');
 var ExampleUser = require('./registerUser');
+const fs = require('fs');
+
+
 
 //Attach the middleware
 app.use( bodyParser.json() );
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
+
+
+app.get('/api', function(req, res) {
+		console.log("In endpoint api");
+        
+		var rawdata = fs.readFileSync('./Testing/POE.postman_collection.json');
+				res.end(rawdata);
+			
+}); 
+
 
 //create the user=admin who will create other users
 //should this endpoint be called each time a new user registers?? 

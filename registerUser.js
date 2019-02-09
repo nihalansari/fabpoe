@@ -93,6 +93,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
 		onerr('Authorization failures may be caused by having admin credentials from a previous CA instance.\n' +
 		'Try again after deleting the contents of the store directory '+store_path);
 	}
+	onerr('Failed to register: ' + err);
 });
 
 }
