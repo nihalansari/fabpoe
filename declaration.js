@@ -1,2 +1,2 @@
 exports.ccid =  'fabpoebr';
-exports.hostIP =  '192.168.99.100';
+exports.hostIP =  '35.231.194.56';
