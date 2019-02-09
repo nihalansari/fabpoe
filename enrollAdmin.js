@@ -9,7 +9,7 @@
  */
 module.exports = { 
 
-fabcarenroll : function(callback){ 
+fabcarenroll : function(callback,onerr){ 
 
 var Fabric_Client = require('fabric-client');
 var Fabric_CA_Client = require('fabric-ca-client');
@@ -59,7 +59,7 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
           enrollmentSecret: 'adminpw'
         }).then((enrollment) => {
           console.log('Successfully enrolled admin user "admin"');
-		  callback('user "admin" successfully enrolled!');
+		  //callback('user "admin" successfully enrolled!');
           return fabric_client.createUser(
               {username: 'admin',
                   mspid: 'Org1MSP',
@@ -71,13 +71,14 @@ Fabric_Client.newDefaultKeyValueStore({ path: store_path
         }).catch((err) => {
           console.error('Failed to enroll and persist admin. Error: ' + err.stack ? err.stack : err);
           throw new Error('Failed to enroll admin');
+		  onerr('Failed to enroll and persist admin. Error: ' + err.stack ? err.stack : err);
         });
     }
 }).then(() => {
     console.log('Assigned the admin user to the fabric client ::' + admin_user.toString());
 }).catch((err) => {
     console.error('Failed to enroll admin: ' + err);
-	//onerr('ERROR: user "admin" enrollment failed!');
+	onerr('ERROR: user "admin" enrollment failed: ' + err);
 });
 
 }

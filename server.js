@@ -36,11 +36,21 @@ app.post('/enrolladmin', function(req, res) {
         var data = req.body;
 		var adm = ExampleAdmin.fabcarenroll(function(data){
 			//callback here
-			console.log("inside callback enrolladmin");
+			console.log("inside OK callback enrolladmin");
 			console.log(data);
 			res.end(data);
 			
-		}); 
+		},
+		
+		function(data){ //error
+			//callback here
+			console.log("inside error callback enrolladmin");
+			console.log(data);
+			res.end(data);
+			
+		}
+		
+		); 
 	});
 
 //register a new user idenitified by "userID"
