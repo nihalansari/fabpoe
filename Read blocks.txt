@@ -9,3 +9,7 @@ https://fabric-sdk-node.github.io/Channel.html#queryBlock
 .payload.header.channel_header.epoc
 
 String.fromCharCode.apply(null, [102, 111, 111])
+
+
+1) get blockchain height using queryInfo(target, useAdmin)
+2) query blocks in pages (e.g. 10 blocks at a time) by using queryBlock(blockNumber, target, useAdmin, skipDecode)
