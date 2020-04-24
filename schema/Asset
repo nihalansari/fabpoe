@@ -1,0 +1,18 @@
+We call asset an object with various fields stored on the ledger. Currently there is only one asset and it has the following schema:
+
+
+### Example asset
+
+{
+	"assetId":"4C0E997B996209B06069475E3DBE728867BA8256FBCDCD865225285C6D212A13",
+	"tmspStart":"",
+	"tmspEnd":"",
+	"ownerId":"user1",
+	"docDesc":"TEST DOCUMENT INVOICE001"
+}
+
+Definition: 
+1) ##assetId is a 40 byte hash
+2) It is the `primary key` of hte object being stored on the ledger. It can be a PDF, Image, Binary file, html page etc.
+3) docDesc is reserved for keeping document title or description to give the user an impression about what the source document was created for.
+4) ownerId is the user who stamped this document(the hash) on the ledger for the very first time. 
